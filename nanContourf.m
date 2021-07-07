@@ -1,45 +1,45 @@
 
-function h = nanContourf(xb,yb,x,y,z)
-% 
+function h = nanContourf(xb,yb,x,y,z,varargin)
+%
 % h = nanContourf(xb,yb,x,y,z)
-% 
+%
 % requires inpaint_nans.m (google it or MATLAB Central)
 %
-% Plots an extrapolated contourf of your (x,y,z), and uses 
+% Plots an extrapolated contourf of your (x,y,z), and uses
 % xb and yb (the boundaries of the boxes of your map)
-% to fill in the where the nans are. Among other things, 
+% to fill in the where the nans are. Among other things,
 % this function eventually calls
 %   h = contourf(x,y,z)
-% Default value for the contour linestyle has been 
+% Default value for the contour linestyle has been
 % changed to'none' (because it is prettier I think)
 % default value for the fill linestyle is the default of fill,
 % and default value for the nan fill is a gray (rgb = .8*[1 1 1])
 %
 % Below is an example use. From the map of peaks,
 % to which I incorporated islands, and continents with lakes,
-% which are connected patches of nans. 
+% which are connected patches of nans.
 % Copy paste without the first percent sign, and run
 % to see a few different options.
 %
 % % start from peaks, cropped for asymmetry
 % z = peaks ;
 % z(end,:) = [] ;
-% 
-% % some coordinate system 
+%
+% % some coordinate system
 % x = sin(linspace(-1,1,size(z,2))) ;
 % y = log(linspace(1,3,size(z,1))) ;
-% 
+%
 % % create some nan islands and lakes
 % iznan = find(flipud(sin(z))>.5) ;
 % z(iznan) = nan ;
-% 
+%
 % % usual contourf
 % subplot(2,1,1)
 % contourf(x,y,z)
 % title('usual contourf')
-% 
+%
 % % nanContourf (needs border coordinates)
-% % so I create some around x and y 
+% % so I create some around x and y
 % subplot(2,1,2)
 % xb = (x(2:end)+x(1:end-1))/2 ;
 % xb = [2*x(1)-xb(1) xb 2*x(end)-xb(end)] ;
@@ -50,7 +50,7 @@ function h = nanContourf(xb,yb,x,y,z)
 % filling the nans for the contours to connect nicely
 % with the borders
 z_ext = inpaint_nans(z) ;
-contourf(x,y,z_ext,'linestyle','none')
+h = contourf(x,y,z_ext,varargin{:},'linestyle','none') ;
 hold on
 % black and white z
 z_bw = zeros(size(z)) ;
@@ -62,10 +62,10 @@ gray = .8 * [1 1 1] ;
 for j=1:length(iiCC)
   xfill = [xb(iiCC(j)) xb(iiCC(j)+1) xb(iiCC(j)+1) xb(iiCC(j)) xb(iiCC(j))];
   yfill = [yb(jjCC(j)) yb(jjCC(j)) yb(jjCC(j)+1) yb(jjCC(j)+1) yb(jjCC(j))];
-  h = fill(xfill,yfill, gray, 'linestyle','none');
-  set(h,'facealpha',1)
+  hnans = fill(xfill,yfill, gray, 'linestyle','none');
+  set(hnans,'facealpha',1)
 end
- 
+
 % drawing the coast for 'wasd' (as in directions) facing coasts
 % a = west
 z_bw_a = [z_bw(:,2:end) zeros(size(z_bw,1),1)] ;
