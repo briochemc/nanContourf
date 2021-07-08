@@ -1,6 +1,10 @@
 # nanContourf
 
-A GitHub version of nanContourf on MATLAB Central
+Like contourf but fills in the nans nicely given grid borders.
+
+Check the example to see what this means:
+
+![](https://au.mathworks.com/matlabcentral/mlc-downloads/downloads/submissions/52810/versions/8/screenshot.png)
 
 Example with peaks
 
