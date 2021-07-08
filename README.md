@@ -2,11 +2,13 @@
 
 Like contourf but fills in the nans nicely given grid borders.
 
-Check the example to see what this means:
+[![View nanContourf on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://au.mathworks.com/matlabcentral/fileexchange/52810-nancontourf)
 
-![](https://au.mathworks.com/matlabcentral/mlc-downloads/downloads/submissions/52810/versions/8/screenshot.png)
+### Example
 
-Example with peaks
+<img width=66.6% src="https://au.mathworks.com/matlabcentral/mlc-downloads/downloads/submissions/52810/versions/8/screenshot.png">
+
+Code:
 
 ```matlab
 % start from peaks, cropped for asymmetry
@@ -38,7 +40,7 @@ title('nanContourf')
 ```
 
 
-Example use for AO users:
+### AWESOME OCIM example:
 
 ```matlab
 figure(1)
